@@ -5,6 +5,8 @@ use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\MatakuliahController;
 use App\Http\Controllers\JadwalKuliahController;
 use App\Http\Controllers\AbsensiController;
+use App\Http\Controllers\KontrakController;
+use App\Http\Controllers\SemesterController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 /*
@@ -30,6 +32,8 @@ Route::resource('/mahasiswa', MahasiswaController::class)->middleware(['admin'])
 Route::resource('/matakuliah', MatakuliahController::class)->middleware(['admin']);
 Route::resource('/jadwal', JadwalKuliahController::class)->middleware(['admin']);
 Route::resource('/absensi', AbsensiController::class)->middleware(['admin']);
+Route::resource('/kontrak', KontrakController::class)->middleware(['admin']);
+Route::resource('/semester', SemesterController::class)->middleware(['admin']);
 
 Route::get('/test', function(){
     return view('tester');

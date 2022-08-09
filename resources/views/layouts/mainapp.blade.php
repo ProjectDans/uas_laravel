@@ -160,7 +160,21 @@
                             <a class="sidebar-link waves-effect waves-dark sidebar-link  @if (Request::is('mahasiswa*')) active @endif"
                                 href="{{ url('/absensi') }}" aria-expanded="false">
                                 <i class="fa fa-book" aria-hidden="true"></i>
-                                <span class="hide-menu">Data Absen Mahasiswa</span>
+                                <span class="hide-menu">Presensi Kehadiran</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link  @if (Request::is('mahasiswa*')) active @endif"
+                                href="{{ url('/kontrak') }}" aria-expanded="false">
+                                <i class="fa fa-book" aria-hidden="true"></i>
+                                <span class="hide-menu">Kontrak Kuliah</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link  @if (Request::is('mahasiswa*')) active @endif"
+                                href="{{ url('/semester') }}" aria-expanded="false">
+                                <i class="fa fa-book" aria-hidden="true"></i>
+                                <span class="hide-menu">Semester</span>
                             </a>
                         </li>
                         <li class="text-center p-20 upgrade-btn">
@@ -218,8 +232,7 @@
                 <!-- ============================================================== -->
                 <!-- footer -->
                 <!-- ============================================================== -->
-                <footer class="footer text-center"> 2022 © Simple Admin Panel by <a
-                        href="https://github.com/grimsalphadev">M Haikal Alfandi S</a>
+                <footer class="footer text-center"> 2022 © Simple Admin Panel by ...
                 </footer>
                 <!-- ============================================================== -->
                 <!-- End footer -->

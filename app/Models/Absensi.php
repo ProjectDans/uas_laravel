@@ -9,4 +9,13 @@ class Absensi extends Model
 {
     use HasFactory;
     protected $table = "absensi";
+    protected $primaryKey = "id";
+    protected $fillable = [
+        'id', 'keterangan', 'mahasiswa'
+    ];
+
+    public function Matakuliah()
+    {
+        return $this->belongsTo(Matakuliah::class);
+    }
 }

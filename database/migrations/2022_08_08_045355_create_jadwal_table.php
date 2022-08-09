@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('jadwal', function (Blueprint $table) {
             $table->id();
             $table->date('jadwal');
-            $table->integer('nama_matakuliah_id');
             $table->timestamps();
         });
     }

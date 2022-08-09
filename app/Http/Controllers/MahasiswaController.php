@@ -49,6 +49,7 @@ class MahasiswaController extends Controller
         $mahasiswa->umur = $request->umur;
         $mahasiswa->alamat = $request->alamat;
         $mahasiswa->no_tlp = $request->no_tlp;
+        $mahasiswa->semester = $request->semester;
         $mahasiswa->save();
         return redirect('mahasiswa')->with('success', 'Data Berhasil Ditambahkan');
     }
@@ -96,6 +97,7 @@ class MahasiswaController extends Controller
         $mahasiswa->umur = $request->umur;
         $mahasiswa->alamat = $request->alamat;
         $mahasiswa->no_tlp = $request->no_tlp;
+        $mahasiswa->semester = $request->semester;
         $mahasiswa->save();
         return redirect('mahasiswa')->with('success', 'Data Berhasil Diupdate');
     }

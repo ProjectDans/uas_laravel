@@ -11,13 +11,13 @@
         @csrf
 
         <div class="mb-3">
-            <label>Nama Matakuliah</label>
-            <select class="form-control" name="matakuliah_id" aria-label="Default select example">
-                <option disabled value selected>Pilih Matakuliah</option>
-                @foreach ($matakuliah as $item)
-                    <option value="{{$item->id}}">{{$item->matakuliah}}</option>
-                @endforeach
-              </select>
+            <label class="form-label">Nama Matakuliah</label>
+            <input type="text" class="form-control" id="matakuliah_id" name="matakuliah_id" value="@if (old('matakuliah_id')) {{ old('matakuliah_id') }} 
+            @else {{ $dtJadwal->matakuliah_id }} @endif
+            ">
+            @error('jadwal')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
         </div>
         <div class="mb-3">
             <label for="jadwal" class="form-label">Jadwal Kuliah</label>
@@ -29,7 +29,7 @@
             @enderror
         </div>     
 
-        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="submit" class="btn btn-primary">Create</button>
     </form>
     <br>
     <br>

@@ -87,7 +87,11 @@ class JadwalKuliahController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $jadwal = JadwalKuliah::find($id);
+        $jadwal->matakuliah_id = $request->matakuliah_id;
+        $jadwal->jadwal = $request->jadwal;
+        $jadwal->save();
+        return redirect('jadwal')->with('success', 'Jadwal Berhasil Dirubah!');
     }
 
     /**
@@ -98,6 +102,8 @@ class JadwalKuliahController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $jadwal = JadwalKuliah::find($id);
+        $jadwal->delete();
+        return redirect('mahasiswa')->with('success', 'Data Berhasil Dihapus');
     }
 }

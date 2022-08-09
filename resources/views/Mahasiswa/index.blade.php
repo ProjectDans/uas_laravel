@@ -102,6 +102,13 @@
                     @enderror
                 </div>
                 <div class="mb-3">
+                    <label for="semester" class="form-label">Semester Pada Perkuliahan</label>
+                    <input type="number" class="form-control" id="semester" name="semester">
+                    @error('semester')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="mb-3">
                     <label for="nama" class="form-label">Nama Mahasiswa</label>
                     <input type="text" class="form-control" id="nama" name="nama_mhs">
                     @error('nama_mhs')

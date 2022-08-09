@@ -34,10 +34,6 @@
     @endif
 
     <h1 class="mb-3">Data Absensi Mahasiswa</h1>
-
-    <!-- Button trigger modal -->
-    {{-- <a class="btn btn-info" href="{{ url('jadwal/create') }}">Buat Jadwal Matakuliah Baru</a> --}}
-    <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Presensi Kehadiran
     </button>
@@ -45,40 +41,70 @@
         <table class="table table-striped table-hover">
 
             <div class="position-relative mb-5">
-                <div class="position-absolute top-0 end-0"></div>
+                <div class="position-absolute top-0 end-0">{{ $absen->links() }}</div>
             </div>
-            <thead>
+            <thead class="text-center">
                 <th>No</th>
                 <th>Nama Mahasiswa</th>
                 <th>Matakuliah</th>
                 <th>Keterangan</th>
-                <th>action</th>
             </thead>
-            {{-- @php($no = 1)
-            @foreach ($jadwal as $item) --}}
-                <tr>
-                    <td>1</td>
-                    <td>Daniel Celo Onibala</td>
-                    <td>Pemrograman Website</td>
-                    <td><button class="btn btn-sm btn-success" disabled>Hadir</button></td>
-                    <td>
-                        {{-- inline div --}}
-                        <div class="btn-group" role="group">
-                            <a href="" class="btn btn-outline-warning btn-sm text-dark">Edit</a>
-                            {{-- create small space between button --}}
-                            &nbsp; | &nbsp;
-                            <form action="" method="post">
-                                @method('DELETE')
-                                @csrf
-                                <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Apakah Yakin Menghapus Data')">Delete</button>
-                            </form>
-                        </div>
-                    </td>
+            @php($no = 1)
+            @foreach ($absen as $item)
+                <tr class="text-center">
+                    <td>{{$no}}</td>
+                    <td>{{ Auth::user()->name }}</td>
+                    <td>{{$item->matakuliah->matakuliah}}</td>
+                    <td><button class="btn btn-sm btn-outline-primary" disabled>{{$item->keterangan}}</button></td>
                 </tr>
-                {{-- @php($no++)
-            @endforeach --}}
+                @php($no++)
+            @endforeach
         </table>
     </div>
+    <!-- Add Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Form Presensi Kehadiran</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form action="{{ url('absensi') }}" method="POST">
+                @csrf
+        
+                <div class="mb-3">
+                    <label for="nim" class="form-label">Nama Mahasiswa</label>
+                    <input type="text" class="form-control" id="mahasiswa" name="mahasiswa">
+                    @error('nim')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <label>Nama Matakuliah</label>
+                    <select class="form-control" name="matakuliah_id" aria-label="Default select example">
+                        <option disabled value selected>Pilih Matakuliah</option>
+                        @foreach ($matakuliah as $item)
+                            <option value="{{$item->id}}">{{$item->matakuliah}}</option>
+                        @endforeach
+                      </select>
+                </div>
+                <div class="mb-3">
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" name="keterangan" id="keteranganH" value="Hadir">
+                        <label for="keteranganH" class="form-check-label">Hadir</label>
+                    </div> 
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" name="keterangan" id="keteranganTH" value="Tidak Hadir">
+                        <label for="keteranganTH" class="form-check-label">Tidak Hadir</label>
+                    </div> 
+                </div>            
+                <button type="submit" class="btn btn-primary">Create</button>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
     <br>
     <br>
     <br>

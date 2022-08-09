@@ -13,10 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('absensi', function (Blueprint $table) {
-            $table->id();
-            $table->string('keterangan');
-            $table->timestamps();
+        Schema::table('absensi', function (Blueprint $table) {
+            $table->integer('matakuliah_id');
         });
     }
 
@@ -27,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('absensi');
+        Schema::table('absensi', function (Blueprint $table) {
+            //
+        });
     }
 };

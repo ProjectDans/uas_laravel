@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Absensi;
-use App\Models\Mahasiswa;
-use App\Models\Matakuliah;
+use App\Models\Semester;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class AbsensiController extends Controller
+class SemesterController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +15,9 @@ class AbsensiController extends Controller
      */
     public function index()
     {
-        $matakuliah = Matakuliah::all();
-        $absen = Absensi::with('matakuliah')->paginate(10);
-        return view('absensi.index', compact(
-            'absen', 'matakuliah'
+        $dtSemester = Semester::all();
+        return view('semester.index', compact(
+            'dtSemester'
         ));
     }
 
@@ -31,11 +28,7 @@ class AbsensiController extends Controller
      */
     public function create()
     {
-        $matakuliah = Matakuliah::all();
-        $absen = new Absen;
-        return view('absensi.create', compact(
-            'matakuliah', 'absen'
-        ));
+        //
     }
 
     /**
@@ -46,12 +39,7 @@ class AbsensiController extends Controller
      */
     public function store(Request $request)
     {
-        $absen = new Absensi;
-        $absen->mahasiswa = $request->mahasiswa;
-        $absen->keterangan = $request->keterangan;
-        $absen->matakuliah_id = $request->matakuliah_id;
-        $absen->save();
-        return redirect('absensi')->with('success','Berhasil Melakukan Absensi');
+        //
     }
 
     /**

@@ -18,4 +18,8 @@ class Matakuliah extends Model
     {
         return $this->hasMany(JadwalKuliah::class);
     }
+    public function Absensi()
+    {
+        return $this->hasMany(Absensi::class);
+    }
 }
