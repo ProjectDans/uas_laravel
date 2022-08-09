@@ -142,6 +142,27 @@
                                 <span class="hide-menu">Mahasiswa</span>
                             </a>
                         </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link  @if (Request::is('mahasiswa*')) active @endif"
+                                href="{{ url('/matakuliah') }}" aria-expanded="false">
+                                <i class="fa fa-book" aria-hidden="true"></i>
+                                <span class="hide-menu">Matakuliah</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link  @if (Request::is('mahasiswa*')) active @endif"
+                                href="{{ url('/jadwal') }}" aria-expanded="false">
+                                <i class="fa fa-book" aria-hidden="true"></i>
+                                <span class="hide-menu">Jadwal Kuliah</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link  @if (Request::is('mahasiswa*')) active @endif"
+                                href="{{ url('/absensi') }}" aria-expanded="false">
+                                <i class="fa fa-book" aria-hidden="true"></i>
+                                <span class="hide-menu">Data Absen Mahasiswa</span>
+                            </a>
+                        </li>
                         <li class="text-center p-20 upgrade-btn">
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
@@ -190,13 +211,7 @@
                 <!-- ============================================================== -->
                 <!-- Main Content -->
                 <!-- ============================================================== -->
-                <div class="row">
-                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                        <div class="white-box">
                             @yield('container')
-                        </div>
-                    </div>
-                </div>
                 <!-- ============================================================== -->
                 <!-- End Container fluid  -->
                 <!-- ============================================================== -->

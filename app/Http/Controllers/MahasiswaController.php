@@ -15,8 +15,10 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        $mhs = Mahasiswa::orderBy('updated_at', 'desc')->paginate(5);
-        return view('Mahasiswa.index', ['mahasiswas' => $mhs]);
+        $mahasiswas = Mahasiswa::paginate(5);
+        return view('Mahasiswa.index', compact(
+            'mahasiswas'
+        ));
     }
 
     /**
@@ -26,7 +28,10 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        // return view('Mahasiswa.create');
+        $mahasiswa = new Mahasiswa;
+        return view('Mahasiswa.create', compact(
+            'mahasiswa'
+        ));
     }
 
     /**
@@ -37,39 +42,15 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        // Generate NIM
-        $mahasiswas = Mahasiswa::all();
-        if ($mahasiswas->count() > 0) {
-            $last = $mahasiswas->last();
-            $nim = $last->nim + 1;
-        } else {
-            $nim = 20200121001;
-        }
-
-        // Validate Data Mahasiswa
-        $request->validate([
-            'nama_mhs' => 'required|unique:mahasiswas|max:100|min:3',
-            'email' => 'required|unique:mahasiswas|max:100|min:3',
-            'umur' => 'integer|required|max:100',
-            'alamat' => 'required'
-        ]);
-
-        //  Insert Data Mahasiswa
-        try {
-            $mhs = new Mahasiswa;
-            $mhs->nim = $nim;
-            $mhs->nama_mhs = $request->nama_mhs;
-            $mhs->email = $request->email;
-            $mhs->umur = $request->umur;
-            $mhs->alamat = $request->alamat;
-            $mhs->save();
-        } catch (\Throwable $th) {
-            // return error
-            return redirect('/mahasiswa')->with('error', $th->getMessage());
-        }
-      
-        //    Redirect to Index
-        return redirect('/mahasiswa')->with('success', 'Data Mahasiswa ' . $request->nama_mhs . ' Berhasil Ditambahkan');
+        $mahasiswa = new Mahasiswa;
+        $mahasiswa->nim = $request->nim;
+        $mahasiswa->nama_mhs = $request->nama_mhs;
+        $mahasiswa->email = $request->email;
+        $mahasiswa->umur = $request->umur;
+        $mahasiswa->alamat = $request->alamat;
+        $mahasiswa->no_tlp = $request->no_tlp;
+        $mahasiswa->save();
+        return redirect('mahasiswa')->with('success', 'Data Berhasil Ditambahkan');
     }
 
     /**
@@ -80,7 +61,10 @@ class MahasiswaController extends Controller
      */
     public function show($id)
     {
-       return view('Mahasiswa.show', ['mahasiswa' => Mahasiswa::findOrFail($id)]);
+       $mahasiswa = Mahasiswa::find($id);
+       return view('Mahasiswa.show', compact(
+        'mahasiswa'
+       ));
     }
 
     /**
@@ -91,8 +75,10 @@ class MahasiswaController extends Controller
      */
     public function edit($id)
     {
-        $mahasiswa = Mahasiswa::findOrFail($id);
-        return view('Mahasiswa.edit', ['mahasiswa' => $mahasiswa]);
+        $mahasiswa = Mahasiswa::find($id);
+        return view('Mahasiswa.edit', compact(
+            'mahasiswa'
+        ));
     }
 
     /**
@@ -104,29 +90,14 @@ class MahasiswaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Validate Data Mahasiswa
-        $request->validate([
-            'nama_mhs' => 'required|max:100|min:3',
-            'email' => 'required|max:100|min:3',
-            'umur' => 'integer|required|max:100',
-            'alamat' => 'required'
-        ]);
-
-        // Update Data Mahasiswa
-        try {
-            $mhs = Mahasiswa::findOrFail($id);
-            $mhs->nama_mhs = $request->nama_mhs;
-            $mhs->email = $request->email;
-            $mhs->umur = $request->umur;
-            $mhs->alamat = $request->alamat;
-            $mhs->save();
-        } catch (\Throwable $th) {
-            // return error
-            return redirect('/mahasiswa/edit/'.$request->id)->with('error', $th->getMessage());
-        }
-      
-        //    Redirect to Index
-        return redirect('/mahasiswa')->with('success', 'Data Mahasiswa ' . $request->nama_mhs . ' Berhasil Diubah');
+        $mahasiswa = Mahasiswa::find($id);
+        $mahasiswa->nama_mhs = $request->nama_mhs;
+        $mahasiswa->email = $request->email;
+        $mahasiswa->umur = $request->umur;
+        $mahasiswa->alamat = $request->alamat;
+        $mahasiswa->no_tlp = $request->no_tlp;
+        $mahasiswa->save();
+        return redirect('mahasiswa')->with('success', 'Data Berhasil Diupdate');
     }
 
     /**
@@ -137,16 +108,8 @@ class MahasiswaController extends Controller
      */
     public function destroy($id)
     {
-        // Delete Data Mahasiswa
-        try {
-            $mhs = Mahasiswa::findOrFail($id);
-            $mhs->delete();
-        } catch (\Throwable $th) {
-            // return error
-            return redirect('/mahasiswa')->with('error', $th->getMessage());
-        }
-      
-        //    Redirect to Index
-        return redirect('/mahasiswa')->with('success', 'Data Mahasiswa ' . $mhs->nama_mhs . ' Berhasil Dihapus');
+        $mhs = Mahasiswa::find($id);
+        $mhs->delete();
+        return redirect('mahasiswa')->with('success', 'Data Berhasil Dihapus');
     }
 }

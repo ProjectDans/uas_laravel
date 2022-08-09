@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\MatakuliahController;
+use App\Http\Controllers\JadwalKuliahController;
+use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 /*
@@ -24,6 +27,9 @@ Route::get('/dashboard', function () {
 })->middleware(['admin'])->name('dashboard');
 
 Route::resource('/mahasiswa', MahasiswaController::class)->middleware(['admin']);
+Route::resource('/matakuliah', MatakuliahController::class)->middleware(['admin']);
+Route::resource('/jadwal', JadwalKuliahController::class)->middleware(['admin']);
+Route::resource('/absensi', AbsensiController::class)->middleware(['admin']);
 
 Route::get('/test', function(){
     return view('tester');

@@ -52,8 +52,23 @@
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
+        <div class="mb-3">
+            <label for="no_tlp" class="form-label">No Telepon</label>
+            <input type="number" class="form-control" id="no_tlp" name="no_tlp" value="
+            @if (old('no_tlp')) {{ old('no_tlp') }} 
+            @else
+                {{ $mahasiswa->no_tlp }} @endif
+            ">
+            @error('no_tlp')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+        </div>
 
         <button type="submit" class="btn btn-primary">Update</button>
     </form>
-
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 @endsection
